@@ -85,11 +85,11 @@ class NovaBelongsToDepend extends BelongsTo
         return $this;
     }
 
-    public function setResourceParentClass($resourceParentClass)
+/*    public function setResourceParentClass($resourceParentClass)
     {
       $this->resourceParentClass = $resourceParentClass;
       return $this;
-    }
+    }*/
 
     public function fallback($fallback)
     {
@@ -122,7 +122,8 @@ class NovaBelongsToDepend extends BelongsTo
         }
 
         parent::resolve($resource, $attribute);
-        $this->resourceParentClass = get_class(Nova::newResourceFromModel($resource));
+        //$this->resourceParentClass = get_class(Nova::newResourceFromModel($resource));
+        $this->resourceParentClass = get_parent_class($this);
 
         $foreign = $resource->{$this->attribute}();
         $this->foreignKeyName = $foreign->getForeignKeyName();
@@ -140,6 +141,8 @@ class NovaBelongsToDepend extends BelongsTo
         if ($this->fallback) {
             $this->fallback->resolve($resource);
         }
+
+        return null;
     }
 
     /**
