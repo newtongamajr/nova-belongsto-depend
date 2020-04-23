@@ -85,6 +85,12 @@ class NovaBelongsToDepend extends BelongsTo
         return $this;
     }
 
+    public function setResourceParentClass($resourceParentClass)
+    {
+      $this->resourceParentClass = $resourceParentClass;
+      return $this;
+    }
+
     public function fallback($fallback)
     {
         $this->fallback = $fallback;
