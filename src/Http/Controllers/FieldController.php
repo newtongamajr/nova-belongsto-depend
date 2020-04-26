@@ -15,12 +15,12 @@ class FieldController extends Controller
         if (is_null($request->dependKey)) {
             abort(500, 'Depend On Relationship not found on the Resource specified for the Field "' . $request->attribute . '" Please check you have set correct /App/Nova/Resource');
         }
-        $resource = $request->newResource();
-/*        if (method_exists(request->resourceClass, 'newModel')) {
+
+        if (method_exists($request->resourceClass, 'newModel')) {
             $resource = new $request->resourceClass($request->resourceClass::newModel());
         } else {
             $resource = new $request->resourceClass;
-        }*/
+        }
 
         // Create Nested Array Fields from Panels, Flatten and find
         $fields = $this->returnFields($resource->fields($request));

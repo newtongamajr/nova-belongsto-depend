@@ -82,6 +82,8 @@ class NovaBelongsToDepend extends BelongsTo
     public function dependsOn($relationship)
     {
         $this->dependsOn = Str::lower($relationship);
+      $request = app(NovaRequest::class);
+      $this->resourceParentClass = $request->resource();
         return $this;
     }
 
@@ -127,7 +129,7 @@ class NovaBelongsToDepend extends BelongsTo
         }
 
         parent::resolve($resource, $attribute);
-        $this->resourceParentClass = get_class($resource);
+        $this->resourceParentClass = get_class(Nova::newResourceFromModel($resource));
 
         $foreign = $resource->{$this->attribute}();
         $this->foreignKeyName = $foreign->getForeignKeyName();
@@ -145,8 +147,8 @@ class NovaBelongsToDepend extends BelongsTo
         if ($this->fallback) {
             $this->fallback->resolve($resource);
         }
-        
-        return $this; 
+
+        return $this;
     }
 
     /**
