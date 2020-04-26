@@ -145,6 +145,8 @@ class NovaBelongsToDepend extends BelongsTo
         if ($this->fallback) {
             $this->fallback->resolve($resource);
         }
+        
+        return $this; 
     }
 
     /**
