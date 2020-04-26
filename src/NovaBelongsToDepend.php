@@ -127,7 +127,7 @@ class NovaBelongsToDepend extends BelongsTo
         }
 
         parent::resolve($resource, $attribute);
-        $this->resourceParentClass = get_class(Nova::newResourceFromModel($resource));
+        $this->resourceParentClass = get_class($resource);
 
         $foreign = $resource->{$this->attribute}();
         $this->foreignKeyName = $foreign->getForeignKeyName();
