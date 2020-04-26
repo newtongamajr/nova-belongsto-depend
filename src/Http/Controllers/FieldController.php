@@ -17,7 +17,9 @@ class FieldController extends Controller
         }
 
         if (method_exists($request->resourceClass, 'newModel')) {
-            $resource = new $request->resourceClass($request->resourceClass::newModel());
+            $resourceClass = get_class($request->resourceClass);
+            $newModel = $resourceClass::newModel();
+            $resource = new $request->resourceClass($newModel);
         } else {
             $resource = new $request->resourceClass;
         }
